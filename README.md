@@ -3,11 +3,8 @@ nginx-uuid4-module
 
 `nginx-uuid4-module` provides a directive to set version-4 UUIDs for variables.
 
-This module randomly generates UUID by Mersenne twister.
+This module randomly generates UUIDs with random bytes from /dev/urandom/.
 You can use the UUID as an unique identifier for an HTTP request.
-
-NOTE: You should not treat these UUIDs as secret credentials because an attacker
-can predict subsequent UUIDs by observing past UUIDs.
 
 
 Example configuration
@@ -57,4 +54,3 @@ License
 -------
 
 - `nginx-uuid4-module` is licensed under [the BSD 2-Clause License](LICENSE).
-- Mersenne twister (`mt19937`) is licensed under the BSD 3-Clause License.
