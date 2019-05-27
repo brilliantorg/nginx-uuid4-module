@@ -1,0 +1,24 @@
+diff -Naur nginx-1.10.1/src/event/ngx_event_openssl.c nginx-1.10.1-patched/src/event/ngx_event_openssl.c
+--- nginx-1.10.1/src/event/ngx_event_openssl.c	2016-05-31 13:47:02.000000000 +0000
++++ nginx-1.10.1-patched/src/event/ngx_event_openssl.c	2016-07-11 21:02:39.457129002 +0000
+@@ -740,7 +740,7 @@
+             wbio = SSL_get_wbio((ngx_ssl_conn_t *) ssl_conn);
+ 
+             if (rbio != wbio) {
+-                (void) BIO_set_write_buffer_size(wbio, NGX_SSL_BUFSIZE);
++                (void) BIO_set_write_buffer_size(wbio, 16384);
+                 c->ssl->handshake_buffer_set = 1;
+             }
+         }
+diff -Naur nginx-1.10.1/src/event/ngx_event_openssl.h nginx-1.10.1-patched/src/event/ngx_event_openssl.h
+--- nginx-1.10.1/src/event/ngx_event_openssl.h	2016-05-31 13:47:02.000000000 +0000
++++ nginx-1.10.1-patched/src/event/ngx_event_openssl.h	2016-07-11 21:02:39.457129002 +0000
+@@ -135,7 +135,7 @@
+ #define NGX_SSL_BUFFER   1
+ #define NGX_SSL_CLIENT   2
+ 
+-#define NGX_SSL_BUFSIZE  16384
++#define NGX_SSL_BUFSIZE  1400
+ 
+ 
+ ngx_int_t ngx_ssl_init(ngx_log_t *log);
